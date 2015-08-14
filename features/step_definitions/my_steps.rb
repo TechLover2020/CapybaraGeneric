@@ -1,14 +1,19 @@
-Given(/^I am on the youtube home page$/) do
-  visit 'https://youtube.com'
+
+Given(/^I navigate to url "([^"]*)"$/) do |url|
+  visit url
 end
 
-When(/^I search for "([^"]*)"$/) do |search_term|
-  fill_in 'search_query', :with => search_term
-  click_on 'search-btn'
+And(/^I enter value "([^"]*)" in field "([^"]*)"$/) do |value, field|
+  #find('#lst-ib').set('capybara')
+  #fill_in field , :with=> value
+  find(field).set(value)
 end
 
-Then(/^vidoes of large rodents are returned$/) do
-  page.title == 'Capybara'
-  #page.should  have_content 'Capybara'
-  page.find(:css, "#item-section-060540 a")
+Then(/^page show "([^"]*)"$/) do |search_text|
+  find('#rso a',:text=>search_text).text
+end
+
+And(/^I click "([^"]*)" button$/) do |value|
+  click_on value
+  #find('button.lsb').click
 end
